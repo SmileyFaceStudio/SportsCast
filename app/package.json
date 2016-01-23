@@ -1,0 +1,18 @@
+{
+  "name": "Sports-Cast-App",
+  "productName": "Sports Cast",
+   "repository": {
+      "type": "git",
+      "url": "git://github.com/mistermjtek/sportscast.git"
+  },
+  "license": "MIT",
+  "identifier": "com.example.electron-boilerplate",
+  "description": "Multiplatform application for viewing sports streams",
+  "version": "0.1.0",
+  "author": "Michael Jeffrey Wu",
+  "copyright": "© 2016, your company here",
+  "main": "background.js",
+  "dependencies": {
+    "fs-jetpack": "^0.7.0"
+  }
+}
