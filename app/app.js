@@ -6,13 +6,14 @@ import { remote } from 'electron'; // native electron module
 import jetpack from 'fs-jetpack'; // module loaded from npm
 import { greet } from './hello_world/hello_world'; // code authored by you in this project
 import env from './env';
+
 import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-animate';
 import routeConfig from './routeConfig.js';
-import controllers from './controllers/index';
-import services from './services/index';
-import directives from './directives/index';
+import './controllers/index';
+import './services/index';
+import './directives/index';
 
 // console.log('Loaded environment variables:', env);
 
@@ -39,14 +40,4 @@ angular
         'app.directives'
     ]);
 
-        // setTimeout(
-        //     function asyncBootstrap() {
-        //         angular.bootstrap( document, [ "Demo" ] );
-        //     },
-        //     ( 2 * 1000 )
-        // );
 angular.module('app').config(routeConfig);
-
-controllers();
-services();
-directives();
