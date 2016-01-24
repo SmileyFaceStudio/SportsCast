@@ -30,7 +30,7 @@ export default function HomeController () {
 		console.log(xrayObject);
 		angular.forEach($scope.games, function(element) {
 			angular.forEach(xrayObject, function(x) {
-				if (x.title.indexOf(element.homeTeam) > -1) {
+				if (x.title.includes(element.homeTeam)) {
 					element.link = x.link;
 				}
 			})
