@@ -1,7 +1,7 @@
 {
   "name": "Sports-Cast-App",
   "productName": "Sports Cast",
-   "repository": {
+  "repository": {
       "type": "git",
       "url": "git://github.com/mistermjtek/sportscast.git"
   },

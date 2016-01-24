@@ -24,6 +24,8 @@
   },
   "dependencies": {
     "angular": "^1.4.9",
-    "angular-ui-router": "^0.2.15"
+    "angular-animate": "^1.4.9",
+    "angular-ui-router": "^0.2.15",
+    "x-ray": "^2.0.3"
   }
 }

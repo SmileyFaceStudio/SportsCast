@@ -8,7 +8,11 @@ import { greet } from './hello_world/hello_world'; // code authored by you in th
 import env from './env';
 import angular from 'angular';
 import 'angular-ui-router';
+import 'angular-animate';
 import routeConfig from './routeConfig.js';
+import controllers from './controllers/index';
+import services from './services/index';
+import directives from './directives/index';
 
 // console.log('Loaded environment variables:', env);
 
@@ -28,7 +32,21 @@ import routeConfig from './routeConfig.js';
 
 angular
     .module('app', [
-        'ui.router'
+        'ui.router',
+        'ngAnimate',
+        'app.controllers',
+        'app.services',
+        'app.directives'
     ]);
 
+        // setTimeout(
+        //     function asyncBootstrap() {
+        //         angular.bootstrap( document, [ "Demo" ] );
+        //     },
+        //     ( 2 * 1000 )
+        // );
 angular.module('app').config(routeConfig);
+
+controllers();
+services();
+directives();

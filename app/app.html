@@ -5,6 +5,7 @@
     <title>Sports Cast</title>
 
     <link href="./stylesheets/main.css" rel="stylesheet" type="text/css">
+    <link href="./vendor/milligram.css" rel="stylesheet" type="text/css">
 
     <script src="vendor/electron_boilerplate/context_menu.js"></script>
     <script src="vendor/electron_boilerplate/external_links.js"></script>
@@ -22,18 +23,8 @@
             You are in <strong id="env-name"></strong> environment.
         </p>
     </div> -->
-
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" ui-sref="index">Quick Start</a>
-      <ul class="nav">
-        <li><a ui-sref="home">Home</a></li>
-        <li><a ui-sref="view">Route 2</a></li>
-      </ul>
-    </div>
-  </div>
     
-  <div ui-view>
+  <div class="container" ui-view>
   </div>
 
 </body>

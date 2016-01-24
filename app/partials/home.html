@@ -1,3 +1,15 @@
-<div>
-This is Home View.
+<div class="row" ng-repeat="game in games">
+	<div class="column text-center">
+		<h4>{{game.awayTeam}}</h4>
+		<h5>{{game.awayScore}}</h5>
+	</div>
+	<div class="column text-center">
+	VS
+	</div>
+	<div class="column text-center">
+		<h4>{{game.homeTeam}}</h4>
+		<h5>{{game.homeScore}}</h5>
+	</div>
 </div>
+
+<button ng-click='action()'>Button </button>
