@@ -6,10 +6,14 @@ import HomeController from './home-controller.js';
 
 import ViewController from './view-controller.js';
 
+import SelectController from './select-controller.js';
+
 export default angular.module('app.controllers', [])
 	.controller(FrameController.name, FrameController())
 	
 	.controller(HomeController.name, HomeController())
   
 	.controller(ViewController.name, ViewController())
+
+	.controller(SelectController.name, SelectController())
   

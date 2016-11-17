@@ -1,6 +1,15 @@
 export default ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
+    .state('splash', {
+        url: "/",
+        templateUrl: "partials/splash.html"
+    })
+    .state('select', {
+        url: "/select",
+        templateUrl: "partials/select.html",
+        controller: "SelectController"
+    })
     .state('frame', {
         abstract: true,
         url: "",
@@ -8,7 +17,7 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
         controller: "FrameController"
     })
     .state('frame.home', {
-        url: "/",
+        url: "/home",
         templateUrl: "partials/home.html",
         controller: "HomeController"
     })

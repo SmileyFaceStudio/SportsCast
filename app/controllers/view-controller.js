@@ -6,7 +6,7 @@ export default function ViewController () {
       console.log('reddit api: ', redditData);
       var gameThread= [];
       angular.forEach(redditData, function(value, key) {
-      	if (value.data.author === 'NBAstreamsBot') {
+      	if (value.data.link_flair_text === 'Game Thread') {
       		return gameThread.push(value.data);
       	}
       });
