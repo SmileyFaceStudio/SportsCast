@@ -1,9 +1,11 @@
 import Xray from 'x-ray';
 
 export default function HomeController () {
-  return ['$scope', '$http', function($scope, $http) {
+  return ['$scope', '$http', function($scope, $http, $rootScope) {
   	var xrayObject = [];
     $scope.view = 'Home View';
+
+    $scope.games = [];
 	var x = Xray();
     
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
@@ -13,7 +15,8 @@ export default function HomeController () {
  	// }, function (response) {
   //   	console.log(response);
   //   });
-	x('http://www.reddit.com/r/nba', 'blockquote li', [{
+
+	var scrape = x('http://www.reddit.com/r/nba', 'blockquote li', [{
     	teams: ['strong'],
     	source: '',
     	score: 'a'
@@ -34,34 +37,34 @@ export default function HomeController () {
     	// 	}
     	// })
     	console.log(obj);
+      return obj;
 	});
+
+ $scope.games = scrape;
 
     $scope.action = function () {
     	$scope.view = 'Changed View';
     }
 
-    function scrape (count) { 
-    	x('http://nbastream.net', '#featured a', [{
-		title: '@title',
-    	link: '@href'
-	}])(function(err, obj) {
-		xrayObject = obj.filter(function(el) {
-			return el.link !== 'http://nbastream.net/ads/index.html'
-		})
-		xrayObject = xrayObject.splice(0, count);
-		console.log(xrayObject);
-		angular.forEach($scope.games, function(element) {
-			angular.forEach(xrayObject, function(x) {
-				if (x.title.includes(element.homeTeam)) {
-					element.link = x.link;
-				}
-			})
-		})
-		console.log($scope.games);
-	})
-	}
-
-
-
+ //    function scrape (count) { 
+ //    	x('http://nbastream.net', '#featured a', [{
+	// 	title: '@title',
+ //    	link: '@href'
+	// }])(function(err, obj) {
+	// 	xrayObject = obj.filter(function(el) {
+	// 		return el.link !== 'http://nbastream.net/ads/index.html'
+	// 	})
+	// 	xrayObject = xrayObject.splice(0, count);
+	// 	console.log(xrayObject);
+	// 	angular.forEach($scope.games, function(element) {
+	// 		angular.forEach(xrayObject, function(x) {
+	// 			if (x.title.includes(element.homeTeam)) {
+	// 				element.link = x.link;
+	// 			}
+	// 		})
+	// 	})
+	// 	console.log($scope.games);
+	// })
+	// }
   }];
 }
