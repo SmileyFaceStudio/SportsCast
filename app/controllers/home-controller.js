@@ -1,12 +1,11 @@
 import Xray from 'x-ray';
 
 export default function HomeController () {
-  return ['$scope', '$http', function($scope, $http, $rootScope) {
-  	var xrayObject = [];
+  return ['$scope', '$http', function($scope, $http) {
+  	var xrayObject = []; 
+    var x = Xray();
     $scope.view = 'Home View';
-
     $scope.games = [];
-	var x = Xray();
     
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
   //   .then(function(response) {
@@ -16,31 +15,29 @@ export default function HomeController () {
   //   	console.log(response);
   //   });
 
-	var scrape = x('http://www.reddit.com/r/nba', 'blockquote li', [{
+  x('http://www.reddit.com/r/nba', 'blockquote li', [{
     	teams: ['strong'],
     	source: '',
-    	score: 'a'
+    	status: 'a'
 	}])(function(err, obj) {
-    	
-    	obj.forEach(function(element, index, object) {
-        	if (element.teams.length === 0) {
-            	object.splice(index, 1);
-        	}
-    	})
-    	obj.splice(0, 2); //forEach loop not working as expected
-    	
-    	// angular.forEach(obj, function(value, key) {
-    	// 	if (value.teams.length === 0) {
-    	// 		obj.splice(key, 1);
-    	// 	} else if (!value.source) {
-    	// 		obj.splice(key, 1);
-    	// 	}
-    	// })
-    	console.log(obj);
-      return obj;
+
+  //filters out the non-games info out of the list of games
+  var filteredObj = obj.filter(function (value) {
+    return value.teams.length !== 0;
+  })
+
+  //add scores to each game
+  angular.forEach(filteredObj, function(value, key) {
+    var splitSource = value.source.split(' ');
+    value.scores = splitSource.filter(function(part) {
+      return !isNaN(part);
+    })
+  })
+
+    	console.log(filteredObj);
+      $scope.games = filteredObj;
 	});
 
- $scope.games = scrape;
 
     $scope.action = function () {
     	$scope.view = 'Changed View';
