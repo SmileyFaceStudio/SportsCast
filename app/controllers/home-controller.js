@@ -1,13 +1,11 @@
 import Xray from 'x-ray';
 
 export default function HomeController () {
-  return ['$scope', '$http', 'nbaGames', function($scope, $http, nbaGames) {
+  return ['$scope', '$http', 'teamList', function($scope, $http, teamList) {
   	var xrayObject = []; 
     var x = Xray();
     $scope.view = 'Home View';
     $scope.games = [];
-
-    // $scope.games = nbaGames.gameData;
     
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
   //   .then(function(response) {
@@ -19,8 +17,7 @@ export default function HomeController () {
 
   x('http://www.reddit.com/r/nba', 'blockquote li', [{
     	teams: ['strong'],
-    	source: '',
-    	status: 'a'
+    	source: ''
 	}])(function(err, obj) {
 
   //filters out the non-games info out of the list of games
@@ -28,12 +25,31 @@ export default function HomeController () {
     return value.teams.length !== 0;
   })
 
-  //add scores to each game
+  //add scores, status, logos to each game
   angular.forEach(filteredObj, function(value, key) {
     var splitSource = value.source.split(' ');
     value.scores = splitSource.filter(function(part) {
       return !isNaN(part);
     })
+
+    //return status of game and removes it from splitted string array
+    value.status = splitSource.pop();
+
+    //overwrites team array in case teams aren't found in scraper
+    value.teams = splitSource.filter(function(part) {
+      return isNaN(part);
+    })
+
+    //if LA, make it LAC for LA Clippers
+    if (value.teams.includes('LA')) {
+      value.teams[value.teams.indexOf('LA')] = 'LAC';
+    }
+
+    value.teamNames = [teamList.abbreviations[value.teams[0]], teamList.abbreviations[value.teams[1]]];
+
+    //get logos
+    value.logo = ["https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[0] + '.png', 
+    "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[1] + '.png'];
   })
 
     	console.log(filteredObj);

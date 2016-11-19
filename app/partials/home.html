@@ -1,17 +1,19 @@
 <div class="row card" ng-repeat="game in games">
 	<div class="column text-center">
-		<h4>{{game.teams[0]}}</h4>
+		<img ng-src={{game.logo[0]}} />
+		<h4>{{game.teamNames[0]}}</h4>
 		<h5>{{game.scores[0]}}</h5>
 	</div>
 	<div class="column text-center">
 	VS
 	</div>
 	<div class="column text-center">
-		<h4>{{game.teams[1]}}</h4>
+		<img ng-src={{game.logo[1]}} />
+		<h4>{{game.teamNames[1]}}</h4>
 		<h5>{{game.scores[1]}}</h5>
 	</div>
 </div>
 
-<pre>{{games | json}}</pre>
+<!-- <pre>{{games | json}}</pre> -->
 
 <button ng-click='action()'>Button </button>
