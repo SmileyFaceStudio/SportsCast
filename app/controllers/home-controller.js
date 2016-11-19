@@ -1,11 +1,13 @@
 import Xray from 'x-ray';
 
 export default function HomeController () {
-  return ['$scope', '$http', function($scope, $http) {
+  return ['$scope', '$http', 'nbaGames', function($scope, $http, nbaGames) {
   	var xrayObject = []; 
     var x = Xray();
     $scope.view = 'Home View';
     $scope.games = [];
+
+    // $scope.games = nbaGames.gameData;
     
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
   //   .then(function(response) {
@@ -36,8 +38,8 @@ export default function HomeController () {
 
     	console.log(filteredObj);
       $scope.games = filteredObj;
-	});
-
+      $scope.$apply();
+	})
 
     $scope.action = function () {
     	$scope.view = 'Changed View';
