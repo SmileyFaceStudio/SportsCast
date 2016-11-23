@@ -26,6 +26,7 @@
     "angular": "^1.4.9",
     "angular-animate": "^1.4.9",
     "angular-ui-router": "^0.2.15",
+    "get-urls": "^5.0.1",
     "x-ray": "^2.0.3"
   }
 }
