@@ -24,10 +24,10 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('view', {
         url: "/view",
         templateUrl: "partials/view.html",
-        controller: "ViewController"
-        // params: {
-        //     obj: null
-        // }
+        controller: "ViewController",
+        params: {
+            obj: null
+        }
     })
     
     $urlRouterProvider.otherwise("/");
