@@ -33,7 +33,7 @@ export default function HomeController () {
     })
 
     //return status of game and removes it from splitted string array
-    if ((splitSource[splitSource.length - 1]  === "AM") || (splitSource[splitSource.length - 1]  === "PM")) {
+    if (!splitSource[splitSource.length - 1].includes('FINAL')) {
       value.status = splitSource.pop();
       value.status = splitSource.pop() + ' ' + value.status;
     } else {
@@ -67,7 +67,7 @@ export default function HomeController () {
     }
 
     $scope.viewStreams = function(teams) {
-      $state.go('view');
+      $state.go('view', { obj: teams });
     }
 
  //    function scrape (count) { 
