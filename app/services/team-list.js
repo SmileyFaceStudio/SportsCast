@@ -30,7 +30,7 @@ export default function teamList () {
       "ATL": "Atlanta Hawks",
       "CHA": "Charlotte Hornets",
       "ORL": "Orlando Magic",
-      "WSH": "Washington Wizards",
+      "WAS": "Washington Wizards",
       "MIA": "Miami Heat"
 
     }

@@ -1,4 +1,4 @@
-<div class="row card" ng-repeat="game in games">
+<div class="row card" ng-repeat="game in games" ng-click="viewStreams(game.teams)">
 	<div class="column text-center">
 		<img ng-src={{game.logo[0]}} />
 		<h4>{{game.teamNames[0]}}</h4>

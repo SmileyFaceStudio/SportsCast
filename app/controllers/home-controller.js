@@ -1,7 +1,7 @@
 import Xray from 'x-ray';
 
 export default function HomeController () {
-  return ['$scope', '$http', 'teamList', function($scope, $http, teamList) {
+  return ['$scope', '$http', '$state', 'teamList', function($scope, $http, $state, teamList) {
   	var xrayObject = []; 
     var x = Xray();
     $scope.view = 'Home View';
@@ -33,7 +33,12 @@ export default function HomeController () {
     })
 
     //return status of game and removes it from splitted string array
-    value.status = splitSource.pop();
+    if ((splitSource[splitSource.length - 1]  === "AM") || (splitSource[splitSource.length - 1]  === "PM")) {
+      value.status = splitSource.pop();
+      value.status = splitSource.pop() + ' ' + value.status;
+    } else {
+      value.status = splitSource.pop();
+    }
 
     //overwrites team array in case teams aren't found in scraper
     value.teams = splitSource.filter(function(part) {
@@ -59,6 +64,10 @@ export default function HomeController () {
 
     $scope.action = function () {
     	$scope.view = 'Changed View';
+    }
+
+    $scope.viewStreams = function(teams) {
+      $state.go('view');
     }
 
  //    function scrape (count) { 

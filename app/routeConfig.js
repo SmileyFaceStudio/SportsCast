@@ -25,6 +25,9 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
         url: "/view",
         templateUrl: "partials/view.html",
         controller: "ViewController"
+        // params: {
+        //     obj: null
+        // }
     })
     
     $urlRouterProvider.otherwise("/");
