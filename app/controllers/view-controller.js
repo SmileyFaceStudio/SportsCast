@@ -32,6 +32,8 @@ export default function ViewController () {
     var handleRedditAPI = function(data) {
       var threadData = [];
       var threadLinks = [];
+
+      //push each comment into an array and then flatten the array
       angular.forEach(data, function(value, key) {
         threadData.push(value.data.children);
       })
@@ -41,12 +43,26 @@ export default function ViewController () {
       }).filter(function (value) {
         return value.kind == 't1';
       });
+
+      //create array with ups and links from the body of the reddit comment threads
       angular.forEach(threadData, function(value, key) {
         var upsAndLinks = {'ups': value.data.ups, 'urls': getUrl(value.data.body)};
         threadLinks.push(upsAndLinks);
       })
 
       console.log(threadLinks);
+
+      //filter out elements without links and sort by descending upvote order
+      threadLinks = threadLinks.filter(function(value) {
+        return value.urls.length;
+      })
+
+      console.log(threadLinks);
+
+      threadLinks = threadLinks.sort((a, b) => a.ups - b.ups).reverse();
+
+      console.log(threadLinks);
+
     }
   }];
 }
