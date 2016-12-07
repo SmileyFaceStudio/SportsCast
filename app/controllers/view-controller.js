@@ -1,9 +1,24 @@
 import getUrl from 'get-urls';
+import Xray from 'x-ray';
 
 export default function ViewController () {
-  return ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+  return ['$scope', '$http', '$stateParams', '$sce', function($scope, $http, $stateParams, $sce) {
+
+    var x = Xray();
 
     console.log($stateParams);
+
+    $scope.handleUrl = function(url) {
+      $scope.streamUrl = $sce.trustAsResourceUrl(url);
+      // x(url, 'iframe@src')(function(err, res) {
+      //   if (res) {
+      //     $scope.streamUrl = $sce.trustAsResourceUrl(res);
+      //   } else {
+      //     $scope.streamUrl = $sce.trustAsResourceUrl(url);
+      //   }
+      //   $scope.$apply();
+      // });
+    }
 
     $http.get('https://www.reddit.com/r/nbastreams/new.json').success(function(response) {
     	let redditData = response.data.children;
@@ -46,22 +61,20 @@ export default function ViewController () {
 
       //create array with ups and links from the body of the reddit comment threads
       angular.forEach(threadData, function(value, key) {
-        var upsAndLinks = {'ups': value.data.ups, 'urls': getUrl(value.data.body)};
+        var upsAndLinks = {'ups': value.data.ups, 'urls': getUrl(value.data.body_html)};
         threadLinks.push(upsAndLinks);
       })
-
-      console.log(threadLinks);
 
       //filter out elements without links and sort by descending upvote order
       threadLinks = threadLinks.filter(function(value) {
         return value.urls.length;
       })
 
-      console.log(threadLinks);
-
       threadLinks = threadLinks.sort((a, b) => a.ups - b.ups).reverse();
 
       console.log(threadLinks);
+
+      $scope.streams = threadLinks;
 
     }
   }];
