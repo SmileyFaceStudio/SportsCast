@@ -5,6 +5,21 @@ html, body {
     padding: 0;
 }
 
+.-gray {
+  background-color: #262626;
+}
+
+.outside {
+  height: 100%;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 /* body {
     display: flex;
     justify-content: center;
@@ -28,6 +43,46 @@ html, body {
     margin-bottom: auto;
   }
 }
+
+.splash {
+
+}
+
+.block {
+  color: #fff;
+  font-family: 'Fira Sans', sans-serif;
+  padding: 20% 20px;
+  text-align: center;
+}
+
+.-berry {
+  background: #920517;
+}
+
+
+// Angled Edge
+
+.edge-top-right {
+  position: relative;
+  z-index: 1;
+}
+.edge-top-right:before {
+  background: inherit;
+  content: '';
+  display: block;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: -1;
+  -webkit-backface-visibility: hidden;
+}
+.edge-top-right:before {
+  top: 0;
+          transform: skewY(-3.5deg);
+          transform-origin: 0 0;
+}
+
 
 a {
     text-decoration: none;
