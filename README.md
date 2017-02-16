@@ -1,5 +1,5 @@
-Sports Cast App
-==============
+# Swoosh Stream
+
 Multiplatform desktop application for viewing sports streams for free.
 Built off the comprehensive [boilerplate application](https://github.com/szwacz/electron-boilerplate) for [Electron runtime](http://electron.atom.io).  
 
@@ -10,164 +10,123 @@ Scope of this project:
 - Generate ready for distribution installers of your app for all three operating systems.
 
 # Quick start
-The only development dependency of this project is [Node.js](https://nodejs.org). So just make sure you have it installed.
+
+The only development dependency of this project is [Node.js](https://nodejs.org), so just make sure you have it installed.
 Then type few commands known to every Node developer...
 ```
-git clone https://github.com/mistermjtek/SportsCast
-cd SportsCast
+git clone https://github.com/smileyfaestudio/swoosh.git
+cd swoosh
 npm install
 npm start
 ```
+... and boom! You have a running desktop application on your screen.
 
 # Structure of the project
 
-There are **two** `package.json` files:  
+The application is split between two main folders...
 
-#### 1. For development
-Sits on path: `SportsCast/package.json`. Here you declare dependencies for your development environment and build scripts. **This file is not distributed with real application!**
+`src` - this folder is intended for files which need to be transpiled or compiled (files which can't be used directly by Electron).
 
-Also here you declare the version of Electron runtime you want to use:
-```json
-"devDependencies": {
-  "electron-prebuilt": "^0.34.0"
-}
-```
+`app` - contains all static assets (put here images, css, html etc.) which don't need any pre-processing.
 
-#### 2. Actual application
-Sits on path: `SportsCast/app/package.json`. This is **real** manifest of your application. Declare your app dependencies here.
+The build process compiles all stuff from the `src` folder and puts it into the `app` folder, so after the build has finished, your `app` folder contains the full, runnable application.
 
-#### Why there are two `package.json`?
-1. Native npm modules (those written in C, not JavaScript) need to be compiled, and here we have two different compilation targets for them. Those used in application need to be compiled against electron runtime, and all `devDependencies` need to be compiled against your locally installed node.js. Thanks to having two files this is trivial.
-2. When you package the app for distribution there is no need to add up to size of the app with your `devDependencies`. Here those are always not included (because reside outside the `app` directory).
+Treat `src` and `app` folders like two halves of one bigger thing.
 
-### Project's folders
-
-- `app` - code of your application goes here.
-- `config` - place for you to declare environment specific stuff.
-- `build` - in this folder lands built, runnable application.
-- `releases` - ready for distribution installers will land here.
-- `resources` - resources for particular operating system.
-- `tasks` - build and development environment scripts.
-
+The drawback of this design is that `app` folder contains some files which should be git-ignored and some which shouldn't (see `.gitignore` file). But thanks to this two-folders split development builds are much (much!) faster.
 
 # Development
 
-#### Installation
-
-```
-npm install
-```
-It will also download Electron runtime, and install dependencies for second `package.json` file inside `app` folder.
-
-#### Starting the app
+## Starting the app
 
 ```
 npm start
 ```
 
-#### Adding npm modules to the app
+## Upgrading Electron version
 
-Remember to add your dependency to `app/package.json` file, so do:
-```
-cd app
-npm install name_of_npm_module --save
-```
-
-#### Native npm modules
-
-Want to use them? See [this file](./tasks/rebuild_native.js) for instructions.
-
-#### Working with modules
-
-How about being future proof and using ES6 modules all the time in your app? Thanks to [rollup](https://github.com/rollup/rollup) you can do that. It will transpile the imports to proper `require()` statements, so even though ES6 modules aren't natively supported yet you can start using them today.
-
-You can use it on those kinds of modules:
-```js
-// Modules authored by you
-import { myStuff } from './my_lib/my_stuff';
-// Node.js native
-import fs from 'fs';
-// Electron native
-import { app } from 'electron';
-// Loaded from npm
-import moment from 'moment';
-```
-
-#### Including files to your project
-
-The build script copies files from `app` to `build` directory and the application is started from `build`. Therefore if you want to use any special file/folder in your app make sure it will be copied via some of glob patterns in `tasks/build.js`:
-
-```js
-var paths = {
-    copyFromAppDir: [
-        './node_modules/**',
-        './vendor/**',
-        './**/*.html',
-        './**/*.+(jpg|png|svg)'
-    ],
+The version of Electron runtime your app is using is declared in `package.json`:
+```json
+"devDependencies": {
+  "electron": "1.4.7"
 }
 ```
+Side note: [Electron authors advise](http://electron.atom.io/docs/tutorial/electron-versioning/) to use fixed version here.
 
-#### Unit tests
+## The build pipeline
 
-electron-boilerplate has preconfigured [jasmine](http://jasmine.github.io/2.0/introduction.html) unit test runner. To run it go with standard:
+Build process is founded upon [gulp](https://github.com/gulpjs/gulp) task runner and [rollup](https://github.com/rollup/rollup) bundler. There are two entry files for your code: `src/background.js` and `src/app.js`. Rollup will follow all `import` statements starting from those files and compile code of the whole dependency tree into one `.js` file for each entry point.
+
+You can [add as many more entry points as you like](https://github.com/szwacz/electron-boilerplate/blob/master/tasks/build_app.js#L16) (e.g. to split your app into modules).
+
+By the way, [rollup has a lot of plugins](https://github.com/rollup/rollup/wiki/Plugins). You can add them in [this file](https://github.com/szwacz/electron-boilerplate/blob/master/tasks/bundle.js).
+
+## Adding npm modules to your app
+
+Remember to respect the split between `dependencies` and `devDependencies` in `package.json` file. Only modules listed in `dependencies` will be included into distributable app.
+
+Side note: If the module you want to use in your app is a native one (not pure JavaScript but compiled C code or something) you should first  run `npm install name_of_npm_module --save` and then `npm run postinstall` to rebuild the module for Electron. This needs to be done only once when you're first time installing the module. Later on postinstall script will fire automatically with every `npm install`.
+
+## Working with modules
+
+Thanks to [rollup](https://github.com/rollup/rollup) you can (and should) use ES6 modules for all code in `src` folder. But because ES6 modules still aren't natively supported you can't use them in the `app` folder.
+
+Use ES6 syntax in the `src` folder like this:
+```js
+import myStuff from './my_lib/my_stuff';
+```
+
+But use CommonJS syntax in `app` folder. So the code from above should look as follows:
+```js
+var myStuff = require('./my_lib/my_stuff');
+```
+
+# Testing
+
+## Unit tests
+
 ```
 npm test
 ```
-You don't have to declare paths to spec files in any particular place. The runner will search through the project for all `*.spec.js` files and include them automatically.
 
+Using [electron-mocha](https://github.com/jprichardson/electron-mocha) test runner with the [chai](http://chaijs.com/api/assert/) assertion library. This task searches for all files in `src` directory which respect pattern `*.spec.js`.
+
+## End to end tests
+
+```
+npm run e2e
+```
+
+Using [mocha](https://mochajs.org/) test runner and [spectron](http://electron.atom.io/spectron/). This task searches for all files in `e2e` directory which respect pattern `*.e2e.js`.
+
+## Code coverage
+
+```
+npm run coverage
+```
+
+Using [istanbul](http://gotwarlost.github.io/istanbul/) code coverage tool.
+
+You can set the reporter(s) by setting `ISTANBUL_REPORTERS` environment variable (defaults to `text-summary` and `html`). The report directory can be set with `ISTANBUL_REPORT_DIR` (defaults to `coverage`).
+
+## Continuous integration
+
+Electron [can be plugged](https://github.com/atom/electron/blob/master/docs/tutorial/testing-on-headless-ci.md) into CI systems. Here two CIs are preconfigured for you. [Travis CI](https://travis-ci.org/) tests on macOS and Linux, [App Veyor](https://www.appveyor.com) tests on Windows.
 
 # Making a release
 
-**Note:** There are various icon and bitmap files in `resources` directory. Those are used in installers and are intended to be replaced by your own graphics.
+To package your app into an installer use command:
 
-To make ready for distribution installer use command:
 ```
 npm run release
 ```
-It will start the packaging process for operating system you are running this command on. Ready for distribution file will be outputted to `releases` directory.
 
-You can create Windows installer only when running on Windows, the same is true for Linux and OSX. So to generate all three installers you need all three operating systems.
+It will start the packaging process for operating system you are running this command on. Ready for distribution file will be outputted to `dist` directory.
 
-## Mac only
+You can create Windows installer only when running on Windows, the same is true for Linux and macOS. So to generate all three installers you need all three operating systems.
 
-#### App signing
-
-The Mac release supports [code signing](https://developer.apple.com/library/mac/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html). To sign the `.app` in the release image, include the certificate ID in the command as so,
-```
-npm run release -- --sign A123456789
-```
-
-## Windows only
-
-#### Installer
-
-The installer is built using [NSIS](http://nsis.sourceforge.net). You have to install NSIS version 3.0, and add its folder to PATH in Environment Variables, so it is reachable to scripts in this project. For example, `C:\Program Files (x86)\NSIS`.
-
-#### 32-bit build on 64-bit Windows
-
-There are still a lot of 32-bit Windows installations in use. If you want to support those systems and have 64-bit OS make sure you've installed 32-bit (instead of 64-bit) Node version. There are [versions managers](https://github.com/coreybutler/nvm-windows) if you feel the need for both architectures on the same machine.
+All packaging actions are handled by [electron-builder](https://github.com/electron-userland/electron-builder). It has a lot of [customization options](https://github.com/electron-userland/electron-builder/wiki/Options), which you can declare under ["build" key in package.json file](https://github.com/szwacz/electron-boilerplate/blob/master/package.json#L2).
 
 # License
 
-The MIT License (MIT)
-
-Copyright (c) 2015 Michael Jeffrey Wu
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Released under the MIT license.
