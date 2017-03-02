@@ -1,2 +1,10 @@
 <p>Choose your Team</p>
+
+<div class="carousel" ng-controller="SelectController as cs">
+  <div class="controls"><a class="prev" ng-click="cs.prev()"><</a><a class="next" ng-click="cs.next()">></a></div>
+  <div class="window">
+    <div class="pane" ng-repeat="(key,src) in cs.images" ng-class="cs.position(key)"><img ng-src="{{src.logo}}"/></div>
+  </div>
+</div>
+
 <button ui-sref="frame.home">Watch</button>

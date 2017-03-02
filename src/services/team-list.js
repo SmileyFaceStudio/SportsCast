@@ -2,37 +2,38 @@ export default function teamList () {
   return function() {  
 
     var abbreviations = {
+
+      "ATL": "Atlanta Hawks",
+      "BOS": "Boston Celtics",
+      "BKN": "Brooklyn Nets",
+      "CHA": "Charlotte Hornets",
+      "CHI": "Chicago Bulls",
+      "CLE": "Cleveland Cavaliers",
+      "DAL": "Dallas Mavericks",
+      "DEN": "Denver Nuggets",
+      "DET": "Detroit Pistons",
       "GSW": "Golden State Warriors",
+      "HOU": "Houston Rockets",
+      "IND": "Indiana Pacers",
       "LAC": "Los Angeles Clippers",
       "LAL": "Los Angeles Lakers",
-      "SAC": "Sacramento Kings",
-      "PHX": "Phoenix Suns",
-      "SAS": "San Antonio Spurs",
-      "HOU": "Houston Rockets",
       "MEM": "Memphis Grizzlies",
-      "DAL": "Dallas Mavericks",
-      "NOP": "New Orleans Pelicans",
-      "OKC": "Oklahoma City Thunder",
-      "POR": "Portland Trailblazers",
-      "UTA": "Utah Jazz",
-      "DEN": "Denver Nuggets",
-      "MIN": "Minnesota Timberwolves",
-      "TOR": "Toronto Raptors",
-      "BOS": "Boston Celtics",
-      "NYK": "New York Knicks",
-      "BKN": "Brooklyn Nets",
-      "PHI": "Philadelphia 76ers",
-      "CLE": "Cleveland Cavaliers",
-      "CHI": "Chicago Bulls",
-      "DET": "Detroit Pistons",
-      "IND": "Indiana Pacers",
+      "MIA": "Miami Heat",
       "MIL": "Milwaukee Bucks",
-      "ATL": "Atlanta Hawks",
-      "CHA": "Charlotte Hornets",
+      "MIN": "Minnesota Timberwolves",
+      "NOP": "New Orleans Pelicans",
+      "NYK": "New York Knicks",
+      "OKC": "Oklahoma City Thunder",
       "ORL": "Orlando Magic",
-      "WAS": "Washington Wizards",
-      "MIA": "Miami Heat"
-
+      "PHI": "Philadelphia 76ers",
+      "PHX": "Phoenix Suns",
+      "POR": "Portland Trailblazers",
+      "SAC": "Sacramento Kings",
+      "SAS": "San Antonio Spurs",
+      "UTA": "Utah Jazz",
+      "TOR": "Toronto Raptors",
+      "WAS": "Washington Wizards"
+      
     }
 
     // var productList = [];

@@ -13,7 +13,6 @@ var getUrl = _interopDefault(require('get-urls'));
 
 // Simple wrapper exposing environment variables to rest of the code.
 
-// The variables have been written to `env.json` by the build process.
 var env = jetpack.cwd(__dirname).read('env.json', 'json');
 
 var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -171,7 +170,7 @@ function ViewController () {
       // });
     };
 
-    $http.get('https://www.reddit.com/r/nbastreams/new.json').success(function(response) {
+    $http.get('https://www.reddit.com/r/nbastreams/new.json').then(function(response) {
     	let redditData = response.data.children;
       var gameThread = [];
       var thread = '';
@@ -189,10 +188,12 @@ function ViewController () {
       console.log(thread);
 
       if (thread)
-      	$http.get(thread + '.json').success(function(response) {
+      	$http.get(thread + '.json').then(function(response) {
       		console.log('thread:', response);
           handleRedditAPI(response);
       	});
+    }, function(err) {
+      return alert("Error getting stream links");
     });
 
     var handleRedditAPI = function(data) {
@@ -232,8 +233,44 @@ function ViewController () {
 }
 
 function SelectController () {
-  return ['$scope', '$http', function($scope, $http) {
+  return ['$scope', '$http', 'teamList', function($scope, $http, teamList) {
+    var vm = this;
+  
+  vm.active = 0;
+  vm.images = [];
 
+  var x;
+  for (x in teamList.abbreviations) {
+    let defaultObj = {team: x, logo: "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + x + '.png'};
+    console.log(defaultObj);
+    vm.images.push(defaultObj);
+  }
+
+  vm.position = position;
+  vm.next = next;
+  vm.prev = prev;
+
+  var pLen = vm.images.length;
+  
+  function position(key) {
+    return {
+      left: key < vm.active,
+      right: key > vm.active,
+      hide: Math.abs(vm.active-key) > 1
+    }
+  }
+  
+  function next() {
+    if (vm.active < pLen-1) {
+      vm.active += 1;
+    }
+  }
+  
+  function prev() {
+    if (vm.active > 0) {
+      vm.active -= 1;
+    }
+  }
   }];
 }
 
@@ -270,37 +307,38 @@ function teamList () {
   return function() {  
 
     var abbreviations = {
+
+      "ATL": "Atlanta Hawks",
+      "BOS": "Boston Celtics",
+      "BKN": "Brooklyn Nets",
+      "CHA": "Charlotte Hornets",
+      "CHI": "Chicago Bulls",
+      "CLE": "Cleveland Cavaliers",
+      "DAL": "Dallas Mavericks",
+      "DEN": "Denver Nuggets",
+      "DET": "Detroit Pistons",
       "GSW": "Golden State Warriors",
+      "HOU": "Houston Rockets",
+      "IND": "Indiana Pacers",
       "LAC": "Los Angeles Clippers",
       "LAL": "Los Angeles Lakers",
-      "SAC": "Sacramento Kings",
-      "PHX": "Phoenix Suns",
-      "SAS": "San Antonio Spurs",
-      "HOU": "Houston Rockets",
       "MEM": "Memphis Grizzlies",
-      "DAL": "Dallas Mavericks",
-      "NOP": "New Orleans Pelicans",
-      "OKC": "Oklahoma City Thunder",
-      "POR": "Portland Trailblazers",
-      "UTA": "Utah Jazz",
-      "DEN": "Denver Nuggets",
-      "MIN": "Minnesota Timberwolves",
-      "TOR": "Toronto Raptors",
-      "BOS": "Boston Celtics",
-      "NYK": "New York Knicks",
-      "BKN": "Brooklyn Nets",
-      "PHI": "Philadelphia 76ers",
-      "CLE": "Cleveland Cavaliers",
-      "CHI": "Chicago Bulls",
-      "DET": "Detroit Pistons",
-      "IND": "Indiana Pacers",
+      "MIA": "Miami Heat",
       "MIL": "Milwaukee Bucks",
-      "ATL": "Atlanta Hawks",
-      "CHA": "Charlotte Hornets",
+      "MIN": "Minnesota Timberwolves",
+      "NOP": "New Orleans Pelicans",
+      "NYK": "New York Knicks",
+      "OKC": "Oklahoma City Thunder",
       "ORL": "Orlando Magic",
-      "WAS": "Washington Wizards",
-      "MIA": "Miami Heat"
-
+      "PHI": "Philadelphia 76ers",
+      "PHX": "Phoenix Suns",
+      "POR": "Portland Trailblazers",
+      "SAC": "Sacramento Kings",
+      "SAS": "San Antonio Spurs",
+      "UTA": "Utah Jazz",
+      "TOR": "Toronto Raptors",
+      "WAS": "Washington Wizards"
+      
     };
 
     // var productList = [];
@@ -405,22 +443,6 @@ angular$1.module('app.directives', [])
 // Here is the starting point for the application
 
 // Use new ES6 modules syntax for everything.
-// console.log('Loaded environment variables:', env);
-
-// var app = remote.app;
-// var appDir = jetpack.cwd(app.getAppPath());
-
-// // Holy crap! This is browser window with HTML and stuff, but I can read
-// // here files like it is node.js! Welcome to Electron world :)
-// console.log('The author of this app is:', appDir.read('package.json', 'json').author);
-// console.log('This is angular object ' + angular);
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     document.getElementById('greet').innerHTML = greet();
-//     document.getElementById('platform-info').innerHTML = os.platform();
-//     document.getElementById('env-name').innerHTML = env.name;
-// });
-
 angular$1
     .module('app', [
         'ui.router',

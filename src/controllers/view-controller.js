@@ -20,7 +20,7 @@ export default function ViewController () {
       // });
     }
 
-    $http.get('https://www.reddit.com/r/nbastreams/new.json').success(function(response) {
+    $http.get('https://www.reddit.com/r/nbastreams/new.json').then(function(response) {
     	let redditData = response.data.children;
       var gameThread = [];
       var thread = '';
@@ -38,10 +38,12 @@ export default function ViewController () {
       console.log(thread);
 
       if (thread)
-      	$http.get(thread + '.json').success(function(response) {
+      	$http.get(thread + '.json').then(function(response) {
       		console.log('thread:', response);
           handleRedditAPI(response);
       	});
+    }, function(err) {
+      return alert("Error getting stream links");
     });
 
     var handleRedditAPI = function(data) {
