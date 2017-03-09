@@ -18,6 +18,7 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 30%;
 }
 
 /* body {
@@ -48,15 +49,43 @@ html, body {
 
 }
 
+.logo-container {
+        height: 70%;
+        width: 100%;
+        position:relative;
+}
+
+.logo-container img{
+        display: block;
+    margin: auto;
+    position: absolute;
+    margin: auto;
+    top: 63vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+    
+
 .block {
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
-  padding: 20% 20px;
+  padding: 10vh 0 20vh 0;
   text-align: center;
 }
 
 .-berry {
-  background: #920517;
+  background: #90001E;
+}
+
+.watch-button {
+    background: #6A0C1E;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-size: 20px;
+    box-shadow: -3px 3px 3px 0px #48000F;
+    border:none;
 }
 
 
@@ -79,8 +108,8 @@ html, body {
 }
 .edge-top-right:before {
   top: 0;
-          transform: skewY(-3.5deg);
-          transform-origin: 0 0;
+    transform: skewY(-2.5deg);
+    transform-origin: 0 0;
 }
 
 
@@ -92,7 +121,7 @@ a {
 
 .carousel {
   position: absolute;
-  height: 30em;
+  height: 20em;
   width: 27em;
   top: 50%;
   left: 50%;
@@ -163,3 +192,15 @@ a {
   transform: translate3d(35em, 0, -30em) rotateY(-40deg);
 }
 
+// Header for Select page
+
+.selectTeamHeader {
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    padding-top: 50px;
+}
+
+.selectTeamHeader p, .selectTeamHeader h3 {
+    margin-bottom: 0px;
+}

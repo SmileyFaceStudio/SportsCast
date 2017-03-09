@@ -13,6 +13,7 @@ var getUrl = _interopDefault(require('get-urls'));
 
 // Simple wrapper exposing environment variables to rest of the code.
 
+// The variables have been written to `env.json` by the build process.
 var env = jetpack.cwd(__dirname).read('env.json', 'json');
 
 var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -233,7 +234,7 @@ function ViewController () {
 }
 
 function SelectController () {
-  return ['$scope', '$http', 'teamList', function($scope, $http, teamList) {
+  return ['$scope', '$http', '$filter', 'teamList', function($scope, $http, $filter, teamList) {
     var vm = this;
   
   vm.active = 0;
@@ -241,7 +242,7 @@ function SelectController () {
 
   var x;
   for (x in teamList.abbreviations) {
-    let defaultObj = {team: x, logo: "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + x + '.png'};
+    let defaultObj = {team: x, logo: "http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/" + $filter('lowercase')(x) + '.png'};
     console.log(defaultObj);
     vm.images.push(defaultObj);
   }
@@ -443,6 +444,22 @@ angular$1.module('app.directives', [])
 // Here is the starting point for the application
 
 // Use new ES6 modules syntax for everything.
+// console.log('Loaded environment variables:', env);
+
+// var app = remote.app;
+// var appDir = jetpack.cwd(app.getAppPath());
+
+// // Holy crap! This is browser window with HTML and stuff, but I can read
+// // here files like it is node.js! Welcome to Electron world :)
+// console.log('The author of this app is:', appDir.read('package.json', 'json').author);
+// console.log('This is angular object ' + angular);
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     document.getElementById('greet').innerHTML = greet();
+//     document.getElementById('platform-info').innerHTML = os.platform();
+//     document.getElementById('env-name').innerHTML = env.name;
+// });
+
 angular$1
     .module('app', [
         'ui.router',
@@ -453,6 +470,13 @@ angular$1
     ]);
 
 angular$1.module('app').config(routeConfig);
+
+angular$1.module('app').run(['$window', '$rootScope', 
+function ($window ,  $rootScope) {
+  $rootScope.goBack = function(){
+    $window.history.back();
+  };
+}]);
 
 }());
 //# sourceMappingURL=app.js.map

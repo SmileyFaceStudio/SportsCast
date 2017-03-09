@@ -1,10 +1,22 @@
-<p>Choose your Team</p>
+<div class="selectTeamHeader">
+	<p>Playing Tonight</p>
+	<h3>Choose Your Team</h3>
+</div>
 
 <div class="carousel" ng-controller="SelectController as cs">
-  <div class="controls"><a class="prev" ng-click="cs.prev()"><</a><a class="next" ng-click="cs.next()">></a></div>
+  <div class="controls">
+  	<a class="prev" ng-click="cs.prev()"><</a>
+  	<a class="next" ng-click="cs.next()">></a>
+  </div>
   <div class="window">
-    <div class="pane" ng-repeat="(key,src) in cs.images" ng-class="cs.position(key)"><img ng-src="{{src.logo}}"/></div>
+    <div class="pane" ng-repeat="(key,src) in cs.images" ng-class="cs.position(key)">
+    	<img height="300" width="300" ng-src="{{src.logo}}"/>
+    </div>
   </div>
 </div>
 
-<button ui-sref="frame.home">Watch</button>
+<div class="fixed-bottom">
+    <div class="block -berry edge-top-right">
+      <button class="watch-button" ui-sref="frame.home">Watch</button>
+    </div>
+  </div>

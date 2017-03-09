@@ -41,3 +41,10 @@ angular
     ]);
 
 angular.module('app').config(routeConfig);
+
+angular.module('app').run(['$window', '$rootScope', 
+function ($window ,  $rootScope) {
+  $rootScope.goBack = function(){
+    $window.history.back();
+  }
+}]);

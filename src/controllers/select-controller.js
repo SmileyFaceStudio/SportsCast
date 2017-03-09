@@ -1,5 +1,5 @@
 export default function SelectController () {
-  return ['$scope', '$http', 'teamList', function($scope, $http, teamList) {
+  return ['$scope', '$http', '$filter', 'teamList', function($scope, $http, $filter, teamList) {
     var vm = this;
   
   vm.active = 0;
@@ -7,7 +7,7 @@ export default function SelectController () {
 
   var x;
   for (x in teamList.abbreviations) {
-    let defaultObj = {team: x, logo: "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + x + '.png'};
+    let defaultObj = {team: x, logo: "http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/" + $filter('lowercase')(x) + '.png'};
     console.log(defaultObj);
     vm.images.push(defaultObj);
   }
