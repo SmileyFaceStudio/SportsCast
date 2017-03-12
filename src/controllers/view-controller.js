@@ -21,7 +21,7 @@ export default function ViewController () {
     }
 
     $http.get('https://www.reddit.com/r/nbastreams/new.json').then(function(response) {
-    	let redditData = response.data.children;
+    	let redditData = response.data.data.children;
       var gameThread = [];
       var thread = '';
       angular.forEach(redditData, function(value, key) {
@@ -52,7 +52,7 @@ export default function ViewController () {
 
       //push each comment into an array and then flatten the array
       angular.forEach(data, function(value, key) {
-        threadData.push(value.data.children);
+        threadData.push(value.data[1].data.children);
       })
       console.log(threadData);
       threadData = threadData.reduce(function(a, b) { 

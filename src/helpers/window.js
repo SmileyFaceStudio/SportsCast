@@ -12,7 +12,8 @@ export default function (name, options) {
     var stateStoreFile = 'window-state-' + name +'.json';
     var defaultSize = {
         width: options.width,
-        height: options.height
+        height: options.height,
+        titleBarStyle: 'hidden-inset'
     };
     var state = {};
     var win;
@@ -74,7 +75,7 @@ export default function (name, options) {
     };
 
     state = ensureVisibleOnSomeDisplay(restore());
-
+    console.log(Object.assign({}, options, state));
     win = new BrowserWindow(Object.assign({}, options, state));
 
     win.on('close', saveState);

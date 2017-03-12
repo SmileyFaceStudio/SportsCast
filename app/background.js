@@ -54,7 +54,9 @@ var createWindow = function (name, options) {
     var stateStoreFile = 'window-state-' + name +'.json';
     var defaultSize = {
         width: options.width,
-        height: options.height
+        height: options.height,
+        titleBarStyle: 'hidden-inset',
+        show: true
     };
     var state = {};
     var win;
@@ -77,7 +79,9 @@ var createWindow = function (name, options) {
             x: position[0],
             y: position[1],
             width: size[0],
-            height: size[1]
+            height: size[1],
+            titleBarStyle: 'hidden-inset',
+        show: true
         };
     };
 
@@ -116,7 +120,7 @@ var createWindow = function (name, options) {
     };
 
     state = ensureVisibleOnSomeDisplay(restore());
-
+    console.log(Object.assign({}, options, state));
     win = new electron.BrowserWindow(Object.assign({}, options, state));
 
     win.on('close', saveState);
