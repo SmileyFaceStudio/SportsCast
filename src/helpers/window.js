@@ -13,7 +13,8 @@ export default function (name, options) {
     var defaultSize = {
         width: options.width,
         height: options.height,
-        titleBarStyle: 'hidden-inset'
+        titleBarStyle: 'hidden-inset',
+        backgroundColor: '#262626'
     };
     var state = {};
     var win;

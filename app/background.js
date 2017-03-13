@@ -56,7 +56,7 @@ var createWindow = function (name, options) {
         width: options.width,
         height: options.height,
         titleBarStyle: 'hidden-inset',
-        show: true
+        backgroundColor: '#262626'
     };
     var state = {};
     var win;
@@ -79,9 +79,7 @@ var createWindow = function (name, options) {
             x: position[0],
             y: position[1],
             width: size[0],
-            height: size[1],
-            titleBarStyle: 'hidden-inset',
-        show: true
+            height: size[1]
         };
     };
 
