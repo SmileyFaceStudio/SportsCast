@@ -1,0 +1,111 @@
+// @blue: #428bca;
+// @green: #5cb85c;
+// @light-blue: #5bc0de;
+// @orange: #f0ad4e;
+// @red: #d9534f;
+
+@tile-size-sm: 190px;
+@tile-margin: 5px;
+@tile-size-md-lg: (@tile-margin *2) + (@tile-size-sm * 2);
+
+.tiles {
+  font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-size: 16px;
+
+  .tile {
+    position: relative;
+    cursor: pointer;
+    margin: @tile-margin;
+    padding: 5px 15px;
+    float: left;
+    overflow: hidden;
+
+    &.lg-tile {
+      height: @tile-size-md-lg;
+      width: @tile-size-md-lg;
+      .tile-caption {
+        top: @tile-size-md-lg - 39px;
+      }
+    }
+
+    &.sm-tile {
+      height: @tile-size-sm;
+      width: @tile-size-sm;
+      .tile-caption {
+        top: @tile-size-sm - 39px;
+      }
+    }
+
+    &.md-tile {
+      height: @tile-size-sm;
+      width: @tile-size-md-lg;
+      .tile-caption {
+        top: @tile-size-sm - 39px;
+      }
+    }
+
+    .tile-caption {
+      header {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #fff;
+      }
+
+      .tile-arrow-up {
+        float: right;
+        line-height: 40px;
+        color: rgba(255,255,255, .8);
+        .transitions();
+      }
+
+      position: absolute;
+      left: 0;
+      padding: 0 10px 5px 10px;
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0, .4);
+      .transitions();
+
+
+      &:hover {
+        top: 0;
+      }
+
+      &:hover .tile-content {
+        top: 25px;
+      }
+
+      &:hover .tile-arrow-up {
+        opacity: 0;
+      }
+    }
+
+
+    &:active {
+      box-shadow: rgba(0,0,0,.5) 0 0 5px 1px;
+    }
+  }
+}
+
+.tile-row {
+  display: inline-block;
+}
+
+.bg-orange {
+  background: #f0ad4e;
+  color: #fff;
+}
+
+.bg-red {
+  background: #d9534f;
+  color: #fff;
+}
+
+
+.transitions(@duration: .3s) {
+  -moz-transition: ease-in-out @duration;
+  -o-transition: ease-in-out @duration;
+  -webkit-transition: ease-in-out @duration;
+  transition: ease-in-out @duration;
+}

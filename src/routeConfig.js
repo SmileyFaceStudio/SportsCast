@@ -10,6 +10,11 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
         templateUrl: "partials/select.html",
         controller: "SelectController"
     })
+    .state('rep', {
+        url: "/rep",
+        templateUrl: "partials/rep.html",
+        controller: "RepController"
+    })
     .state('frame', {
         abstract: true,
         url: "",

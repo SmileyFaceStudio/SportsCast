@@ -1,0 +1,40 @@
+<div class="nav">
+  <img src="./assets/logo.png" height="95" />
+</div>
+<div class="header text-center">
+  Rep Your Team
+</div>
+
+<div class="container">
+
+  <div class="tiles">
+
+    <div class="tile-row">
+      <div class="lg-tile tile bg-red">
+        <div class="tile-caption">
+          <header>
+            Lorem Ipsum
+            <span class="glyphicon glyphicon-collapse-up tile-arrow-up"></span>
+          </header>
+          Fusce vel sapien elit in malesuada semper mi.
+        </div>
+      </div>
+      
+      <div class="sm-tile tile"  style="background-color: {{team.backgroundColor}}" ng-repeat="team in teams">
+        <img height="150" ng-src="http://i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/spurs/Schad/img/PostgameTeams/{{team.abbreviation}}.png" />
+      </div>
+
+<!--       <a href="#lastone" class="sm-tile tile bg-red">
+        <div class="tile-caption">
+          <header>
+            Lorem Ipsum
+            <span class="glyphicon glyphicon-collapse-up tile-arrow-up"></span>
+          </header>
+          Fusce vel sapien elit in malesuada semper mi.
+        </div>
+      </a> -->
+    </div>
+
+  </div>
+
+</div>

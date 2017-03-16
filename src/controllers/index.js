@@ -8,6 +8,8 @@ import ViewController from './view-controller.js';
 
 import SelectController from './select-controller.js';
 
+import RepController from './rep-controller.js';
+
 export default angular.module('app.controllers', [])
 	.controller(FrameController.name, FrameController())
 	
@@ -16,4 +18,6 @@ export default angular.module('app.controllers', [])
 	.controller(ViewController.name, ViewController())
 
 	.controller(SelectController.name, SelectController())
+
+	.controller(RepController.name, RepController())
   
