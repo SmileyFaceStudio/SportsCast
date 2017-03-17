@@ -8,5 +8,11 @@ export default function RepController () {
         	$scope.teams.push(teamObj);
     	}
 	}
+
+	$scope.selectedTeam = $scope.teams[0];
+
+	$scope.selectTeam = function(team) {
+		$scope.selectedTeam = team;
+	}
   }];
 }

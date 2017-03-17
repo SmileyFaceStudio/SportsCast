@@ -324,6 +324,12 @@ function RepController () {
         	$scope.teams.push(teamObj);
     	}
 	}
+
+	$scope.selectedTeam = $scope.teams[0];
+
+	$scope.selectTeam = function(team) {
+		$scope.selectedTeam = team;
+	};
   }];
 }
 
@@ -399,9 +405,9 @@ function teamList () {
     var colors = {
 
       "ATL": "#FFFFFF",
-      "BOS": "#FDB827",
+      "BOS": "#4E7F5D",
       "BKN": "#FFFFFF",
-      "CHA": "Charlotte Hornets",
+      "CHA": "#008EA6",
       "CHI": "#000000",
       "CLE": "#880037",
       "DAL": "#1061AC",

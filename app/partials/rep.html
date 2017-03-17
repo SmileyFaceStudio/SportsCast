@@ -9,8 +9,9 @@
 
   <div class="tiles">
 
-    <div class="tile-row">
-      <div class="lg-tile tile bg-red">
+    <div class="tile-row"> 
+<!--       <div class="lg-tile tile" style="background-color: {{selectedTeam.backgroundColor}}">
+      <img height="200" ng-src="http://i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/spurs/Schad/img/PostgameTeams/{{selectedTeam.abbreviation}}.png" />
         <div class="tile-caption">
           <header>
             Lorem Ipsum
@@ -18,9 +19,9 @@
           </header>
           Fusce vel sapien elit in malesuada semper mi.
         </div>
-      </div>
+      </div> -->
       
-      <div class="sm-tile tile"  style="background-color: {{team.backgroundColor}}" ng-repeat="team in teams">
+      <div class="tile" ng-class="{'sm-tile': selectedTeam !== team,'lg-tile': selectedTeam === team}" ng-click="selectTeam(team)" style="background-color: {{team.backgroundColor}}" ng-repeat="team in teams">
         <img height="150" ng-src="http://i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/spurs/Schad/img/PostgameTeams/{{team.abbreviation}}.png" />
       </div>
 
@@ -37,4 +38,18 @@
 
   </div>
 
+</div>
+<div class="team-footer" style="background-color: {{selectedTeam.backgroundColor}}">
+<div class="row vertical-align">
+<div class="column margin-left" ng-style="selectedTeam.backgroundColor == '#FFFFFF' || selectedTeam.backgroundColor == '#C4CED4' || selectedTeam.backgroundColor == '#EEE1C6' ? {color:'#000000'} : {color:'#FFF'}">
+<h3>Golden State Warriors</h3>
+5372 Swishstreamers 13W / 3L 1st PAC
+</div>
+<div class="column" style="margin-top:5px;">
+<div class="float-right">
+<button class="stream-button button-clear button-large" ng-class="{'button-black': selectedTeam.backgroundColor == '#FFFFFF' || selectedTeam.backgroundColor == '#C4CED4' || selectedTeam.backgroundColor == '#EEE1C6'}" ui-sref="frame.home">Stream as a Warriors Fan</button>
+<button class="skip-button button-clear" ng-class="{'button-black': selectedTeam.backgroundColor == '#FFFFFF' || selectedTeam.backgroundColor == '#C4CED4' || selectedTeam.backgroundColor == '#EEE1C6'}">Skip</button>
+</div>
+</div>
+</div>
 </div>
