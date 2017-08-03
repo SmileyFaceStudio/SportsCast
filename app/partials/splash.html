@@ -1,14 +1,17 @@
-<div class="splash">
+<div class="splsh--pg">
 
-  <div class="logo-container">
-    <!-- <h2>Swoosh Stream</h2> -->
-    <img src="./assets/logo.png"/>
+  <div class="splsh--cntr-main">
+    <div class="splash--cntr-logo">
+      <img class="" src="./assets/logo.png"/>
+    </div>
   </div>
 
-  <div class="fixed-bottom">
-    <div class="block -berry edge-top-right">
-      <button class="watch-button" ui-sref="select">Watch</button>
-    </div>
+  <div class="splsh--cntr-bttn" ng-controller="ButtonController">
+    <ng-include src="'partials/raised-button.html'" ></ng-include>
+    <!--<button ui-sref="{{ destination }}" class="{{ style }}">{{ message }}</button>-->
+  </div>
+
+  <div class="splsh--ftr-red">
   </div>
 
 </div>

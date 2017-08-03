@@ -1,212 +1,269 @@
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    -webkit-app-region: drag;
-    overflow-x: hidden;
+/* Less variables and mix-ins */
+
+/* font location */
+@font-loc: '../fonts';
+@font-roboto: '@{font-loc}/Roboto_Condensed';
+@roboto-light: '@{font-roboto}/RobotoCondensed-Light.ttf';
+@roboto-regular: '@{font-roboto}/RobotoCondensed-Regular.ttf';
+@roboto-bold: '@{font-roboto}/RobotoCondensed-Bold.ttf';
+@roboto-sans: 'Roboto-Sans';
+
+/* App colors */
+@bckgrnd: #262626;
+@font-color: #FFFFFF;
+@swoosh: #96001A;
+@swoosh-dark: #6A0002;
+@swoosh-darker: #68071C;
+@swoosh-shadow: #111111;
+@warriors: #096EDB;
+@clippers: #0042AF;
+@raptors: #CE1141;
+@cavaliers: #880037;
+@spurs: #C4CED4;
+@pelicans: #B5985A;
+@rockets: #FFFFFF;
+@heat: #FFFFFF;
+@nets: #FFFFFF;
+@76ers: #FFFFFF;
+@hawks: #FFFFFF;
+@blazers: #000000;
+@raptors: #000000;
+@bulls: #000000;
+@wolves: #000000;
+@magic: #000000;
+@lakers: #FDB827;
+@knicks: #F78429;
+@bucks: #EEE1C6;
+@celtics: #FDB827;
+@thunder: #0A7EC2;
+@kings: #5A2B81;
+@pacers: #FFC526;
+@wizards: #E51837;
+@pistons: #ED174C;
+@jazz: #00471B;
+@grizzlies: #FDB927;
+@suns: #E56020;
+@nuggets: #4DA3D5;
+
+/* App fonts */
+
+/* load a font ... */
+.loadFont(@weight: normal; @name: @roboto-sans; @local;) {
+  font-family: @name;
+  font-style: normal;
+  font-weight: @weight;
+  src: url(@local);
 }
 
-button, a, .card {
-  -webkit-app-region: no-drag;
+/* add a font */
+.font(@size: 1.6rem; @weight: 400; @color: @font-color;) {
+  font-family: @roboto-sans, sans-serif;
+  font-size: @size;
+  font-weight: @weight;
+  color: @color;
 }
 
-.-gray {
-  background-color: #262626;
-}
+/* Put @font-faces here... */
+@font-face { .loadFont(@weight: "light"; @local: @roboto-light;) }
+@font-face { .loadFont(@weight: "normal"; @local: @roboto-regular;) }
+@font-face { .loadFont(@weight: "bold"; @local: @roboto-bold;) }
 
-.outside {
-  height: 100%;
-}
+/* baseboard componets */
+@base-clr: #000000;
+@mark-clr: #f0f0f0;
 
-.fixed-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+.base-box() {
   width: 100%;
-  height: 30%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-} */
-
-.text-center {
-    text-align: center;
+.base-type( @font: 1.6rem; @height: 2.56rem;
+  @weight: normal; @style: normal; ) {
+  font-size: @font;
+  line-height: @height;
+  font-weight: @weight;
+  font-style: @style;
 }
 
-.card {
-  position: relative;
-  padding: 12px 12px 14px 44px;
-  min-height: 45px;
-  box-shadow: 0 1px 2px 0 #b5b1ac;
-  border-radius: 4px;
-  background: #fff;
-  margin-bottom: 20px;
-  .column {
-    margin-bottom: auto;
-  }
+.base-inline( @pad: 0; @size: 1.6rem; @vert: middle;
+  @height: 2.56rem; @style: normal; ) {
+  padding: @pad;
+  font-size: @size;
+  font-style: @style;
+  line-height: @height;
+  vertical-align: @vert;
 }
 
-.splash {
-
-}
-
-.logo-container {
-        height: 70%;
-        width: 100%;
-        position:relative;
-}
-
-.logo-container img{
-        display: block;
-    margin: auto;
-    position: absolute;
-    margin: auto;
-    top: 63vh;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-}
-    
-
-.block {
-  color: #fff;
-  font-family: 'Fira Sans', sans-serif;
-  padding: 10vh 0 20vh 0;
-  text-align: center;
-}
-
-.-berry {
-  background: #90001E;
-}
-
-.watch-button {
-    background: #6A0C1E;
-    border-radius: 0px;
-    text-transform: uppercase;
-    font-size: 20px;
-    box-shadow: -3px 3px 3px 0px #48000F;
-    border:none;
-}
-
-
-// Angled Edge
-
-.edge-top-right {
-  position: relative;
-  z-index: 1;
-}
-.edge-top-right:before {
-  background: inherit;
-  content: '';
+.base-input() {
   display: block;
-  height: 50%;
-  left: 0;
-  position: absolute;
-  right: 0;
-  z-index: -1;
-  -webkit-backface-visibility: hidden;
-}
-.edge-top-right:before {
-  top: 0;
-    transform: skewY(-2.5deg);
-    transform-origin: 0 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-
-a {
-    text-decoration: none;
+.base-media( @display: block; ) {
+  display: @display;
+  max-width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Carousel CSS
-
-.carousel {
-  position: absolute;
-  height: 20em;
-  width: 27em;
-  top: 50%;
-  left: 50%;
-  margin: -19em 0 0 -13.5em;
-  -webkit-perspective: 70em;
-  perspective: 70em;
-}
-.carousel .controls {
-  width: 30%;
-  position: absolute;
-  color: #fff;
-  font-size: 5em;
-  top: 100%;
-  left: 37%;
-}
-.carousel .controls a {
-  cursor: pointer;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.carousel .controls a.next {
-  float: right;
-}
-.window {
-  width: 100%;
-  height: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  font-family: Helvetica, Arial, sans-serif;
-}
-.window .pane {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  color: #333;
-  overflow: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-  transition: transform 0.3s, opacity 0.3s;
-}
-.window .pane h1 {
-  font-size: 7em;
-  margin-top: 1.4em;
-}
-.pane.left img,
-.pane.right img {
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
-}
-.pane.left {
-  -webkit-transform: translate3d(-25em, 0, -20em) rotateY(50deg);
-  transform: translate3d(-25em, 0, -20em) rotateY(50deg);
-}
-.pane.left.hide {
-  opacity: 0;
-  -webkit-transform: translate3d(-35em, 0, -30em) rotateY(40deg);
-  transform: translate3d(-35em, 0, -30em) rotateY(40deg);
-}
-.pane.right {
-  -webkit-transform: translate3d(25em, 0, -20em) rotateY(-50deg);
-  transform: translate3d(25em, 0, -20em) rotateY(-50deg);
-}
-.pane.right.hide {
-  opacity: 0;
-  -webkit-transform: translate3d(35em, 0, -30em) rotateY(-40deg);
-  transform: translate3d(35em, 0, -30em) rotateY(-40deg);
+.base-table() {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Header for Select page
+/* Semantics */
+html { font-size: 62.5%; }
+body { .base-box(); .base-type(); word-wrap: break-word; overflow-x: hidden; }
+header { .base-box(); }
+main { .base-box(); }
+footer { .base-box(); }
+section { .base-box(); }
+article { .base-box(); }
+div { .base-box(); }
+menu { .base-box(); list-style: none; }
+nav { .base-box(); }
+address { .base-box(); font-style: normal; }
+summary { .base-box(); list-style: none; }
+details { .base-box(); }
+aside { .base-box(); }
+blockquote { .base-box();  }
+hr { .base-box(); }
+a:active { outline: 0; }
 
-.selectTeamHeader {
-    text-align: center;
-    text-transform: uppercase;
-    color: #FFF;
-    padding-top: 50px;
+/* Type */
+h1 { .base-box(); .base-type(); }
+h2 { .base-box(); .base-type(); }
+h3 { .base-box(); .base-type(); }
+h4 { .base-box(); .base-type(); }
+h5 { .base-box(); .base-type(); }
+h6 { .base-box(); .base-type(); }
+p { .base-box(); }
+pre { .base-box(); line-height: 1.8rem; }
+code { .base-inline( @size: 1.4rem; @height: 1.8rem; ); overflow: auto; }
+samp { .base-inline( @size: 1.4rem; ); }
+kbd { .base-inline( @size: 1.4rem; ); }
+mark { .base-inline(); background-color: @mark-clr; }
+sup { .base-inline( @vert: super; @height: 0; ); }
+sub { .base-inline( @vert: sub; @height: 0; ); }
+q:before { content: ""; }
+q:after { content: ""; }
+
+/* Media */
+figure { .base-media( @display: table; ); }
+figcaption { .base-media( @display: table-caption; ); caption-side: bottom; }
+object { .base-media(); }
+audio { .base-media(); }
+video { .base-media(); }
+img { .base-media(); }
+canvas { .base-media(); }
+iframe { .base-media(); border: none; }
+
+/* Forms */
+form { .base-box(); }
+fieldset { .base-box(); border: none; }
+legend { .base-box(); }
+label { .base-box(); display: block; }
+input { .base-input(); }
+textarea { .base-input(); }
+select { .base-input(); }
+
+/* Lists */
+li { .base-box(); }
+ul { .base-box(); list-style: circle inside; }
+ol { .base-box(); list-style: decimal inside; }
+dl { .base-box(); }
+dt { .base-box(); font-style: italic; }
+dd { .base-box(); }
+
+/* Tables */
+table { .base-table(); border-collapse: collapse; border: 0; }
+caption { .base-table(); text-align: left; }
+th { .base-table(); font-weight: normal; text-align: left; }
+tr { .base-table(); }
+td { .base-table(); }
+thead { .base-table(); }
+tbody { .base-table(); }
+tfoot { .base-table(); }
+
+
+/* Document Declarations */
+::-webkit-scrollbar { display: none; }
+
+body {
+  .font();
 }
 
-.selectTeamHeader p, .selectTeamHeader h3 {
-    margin-bottom: 0px;
+input {
+  .font();
 }
+
+/* color classes */
+.bckgrnd { background-color: @bckgrnd; }
+.swoosh { background-color: @swoosh; }
+.warrriors { background-color: @warriors; }
+.clippers { background-color: @clippers; }
+.raptors { background-color: @raptors; }
+.cavaliers { background-color: @cavaliers; }
+.spurs { background-color: @spurs; }
+.pelicans { background-color: @pelicans; }
+.rockets { background-color: @rockets; }
+.heat { background-color: @heat; }
+.nets { background-color: @nets; }
+.sixers { background-color: @76ers; }
+.hawks { background-color: @hawks; }
+.blazers { background-color: @blazers; }
+.raptors { background-color: @bulls; }
+.bulls { background-color: @bulls; }
+.wolves { background-color: @wolves; }
+.magic { background-color: @magic; }
+.lakers { background-color: @lakers; }
+.knicks { background-color: @knicks; }
+.bucks { background-color: @bucks; }
+.celtics { background-color: @celtics; }
+.thunder { background-color: @thunder; }
+.kings { background-color: @kings; }
+.pacers { background-color: @pacers; }
+.wizards { background-color: @wizards; }
+.pistons { background-color: @pistons; }
+.jazz { background-color: @jazz; }
+.grizzlies { background-color: @grizzlies; }
+.suns { background-color: @suns; }
+.nuggets { background-color: @nuggets; }
+
+/* Actual Pages */
+
+/* Splash page */
+.splsh--pg { display: relative; width: 100%;}
+
+.splsh--cntr-main { position: fixed; display: flex; width: 100%;
+  height: 65%; align-items: center; justify-content: center;
+  z-index: 1; }
+
+.splash--cntr-logo { max-width: 90%;  max-height: 300px; }
+
+    @media (min-width: 800px) {
+      .splash--cntr-logo { max-width: 80%; }
+    }
+
+.cntr--logo-img { }
+
+.splsh--ftr-red { position: fixed; bottom: 0; right: 0; width: 110%;
+  height: 35%; max-height: 300px;
+  background: linear-gradient(92deg, @swoosh, @swoosh-dark);
+  transform-origin: top right; transform: rotate(-2deg);
+  z-index: 0; }
+
+.splsh--cntr-bttn { position: fixed; display: flex; width: 100%;
+  align-items: center; justify-content: center; height: 35%;
+  bottom: 0; z-index: 2;}
+
+.splsh--watch-bttn { position: relative; width: 220px; height: 50px;
+  padding: 0; margin: 0;background-color: @swoosh-darker; .font(@size: 32px;);
+  letter-spacing: 0.2rem; border: 0; box-shadow: -3px 3px 3px @swoosh-shadow;
+  outline: none; }
+.splsh--watch-bttn:active { box-shadow: none; left: -3px; }

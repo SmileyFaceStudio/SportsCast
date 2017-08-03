@@ -13,7 +13,6 @@ var getUrl = _interopDefault(require('get-urls'));
 
 // Simple wrapper exposing environment variables to rest of the code.
 
-// The variables have been written to `env.json` by the build process.
 var env = jetpack.cwd(__dirname).read('env.json', 'json');
 
 var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -21,20 +20,15 @@ var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvid
   $stateProvider
     .state('splash', {
         url: "/",
-        templateUrl: "partials/splash.html"
+        templateUrl: "partials/splash.html",
+        controller: "ButtonController"
     })
     .state('select', {
         url: "/select",
         templateUrl: "partials/select.html",
         controller: "SelectController"
     })
-    .state('frame', {
-        abstract: true,
-        url: "",
-        templateUrl: "partials/frame.html",
-        controller: "FrameController"
-    })
-    .state('frame.home', {
+    .state('home', {
         url: "/home",
         templateUrl: "partials/home.html",
         controller: "HomeController"
@@ -46,26 +40,22 @@ var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvid
         params: {
             obj: null
         }
+    })
+    .state('rep-team', {
+        url: "/rep-team",
+        templateUrl: "partials/rep-team.html",
     });
-    
     $urlRouterProvider.otherwise("/");
 
 }];
 
-function FrameController () {
-  return ['$scope', function($scope) {
-    $scope.items = 'FrameController';
-    console.log($scope.items);
-  }];
-}
-
 function HomeController () {
   return ['$scope', '$http', '$state', 'teamList', function($scope, $http, $state, teamList) {
-  	var xrayObject = []; 
+  	var xrayObject = [];
     var x = Xray();
     $scope.view = 'Home View';
     $scope.games = [];
-    
+
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
   //   .then(function(response) {
   //   	$scope.games = response.data.results.boxScores;
@@ -112,7 +102,7 @@ function HomeController () {
     value.teamNames = [teamList.abbreviations[value.teams[0]], teamList.abbreviations[value.teams[1]]];
 
     //get logos
-    value.logo = ["https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[0] + '.png', 
+    value.logo = ["https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[0] + '.png',
     "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[1] + '.png'];
   });
 
@@ -129,7 +119,7 @@ function HomeController () {
       $state.go('view', { obj: teams });
     };
 
- //    function scrape (count) { 
+ //    function scrape (count) {
  //    	x('http://nbastream.net', '#featured a', [{
 	// 	title: '@title',
  //    	link: '@href'
@@ -239,7 +229,7 @@ function ViewController () {
         threadData.push(value.data);
       });
       console.log(threadData);
-      // threadData = threadData.reduce(function(a, b) { 
+      // threadData = threadData.reduce(function(a, b) {
       //   return a.concat(b);
       // }).filter(function (value) {
       //   return value.kind == 't1';
@@ -309,14 +299,19 @@ function SelectController () {
   }];
 }
 
-angular$1.module('app.controllers', [])
-	.controller(FrameController.name, FrameController())
-	
-	.controller(HomeController.name, HomeController())
-  
-	.controller(ViewController.name, ViewController())
+function ButtonController () {
+  return ["$scope", function($scope) {
+      $scope.destination = "select";
+      $scope.message = "WATCH";
+      $scope.style = "splsh--watch-bttn";
+  }];
+}
 
+angular$1.module('app.controllers', [])
+	.controller(HomeController.name, HomeController())
+	.controller(ViewController.name, ViewController())
 	.controller(SelectController.name, SelectController())
+	.controller(ButtonController.name, ButtonController())
 
 function passData () {
   return function() {  
@@ -475,28 +470,11 @@ function mAppLoading () {
         // );
 
 angular$1.module('app.directives', [])
-
 	.directive(mAppLoading.name, mAppLoading())
 
 // Here is the starting point for the application
 
 // Use new ES6 modules syntax for everything.
-// console.log('Loaded environment variables:', env);
-
-// var app = remote.app;
-// var appDir = jetpack.cwd(app.getAppPath());
-
-// // Holy crap! This is browser window with HTML and stuff, but I can read
-// // here files like it is node.js! Welcome to Electron world :)
-// console.log('The author of this app is:', appDir.read('package.json', 'json').author);
-// console.log('This is angular object ' + angular);
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     document.getElementById('greet').innerHTML = greet();
-//     document.getElementById('platform-info').innerHTML = os.platform();
-//     document.getElementById('env-name').innerHTML = env.name;
-// });
-
 angular$1
     .module('app', [
         'ui.router',

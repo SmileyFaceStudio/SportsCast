@@ -88,7 +88,7 @@ export default function ViewController () {
         threadData.push(value.data);
       })
       console.log(threadData);
-      // threadData = threadData.reduce(function(a, b) { 
+      // threadData = threadData.reduce(function(a, b) {
       //   return a.concat(b);
       // }).filter(function (value) {
       //   return value.kind == 't1';

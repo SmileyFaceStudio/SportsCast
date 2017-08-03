@@ -2,11 +2,11 @@ import Xray from 'x-ray';
 
 export default function HomeController () {
   return ['$scope', '$http', '$state', 'teamList', function($scope, $http, $state, teamList) {
-  	var xrayObject = []; 
+  	var xrayObject = [];
     var x = Xray();
     $scope.view = 'Home View';
     $scope.games = [];
-    
+
   //   $http.get('https://www.kimonolabs.com/api/ondemand/aweuktb4?apikey=c74bb2e2255732911973aae894592185')
   //   .then(function(response) {
   //   	$scope.games = response.data.results.boxScores;
@@ -53,7 +53,7 @@ export default function HomeController () {
     value.teamNames = [teamList.abbreviations[value.teams[0]], teamList.abbreviations[value.teams[1]]];
 
     //get logos
-    value.logo = ["https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[0] + '.png', 
+    value.logo = ["https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[0] + '.png',
     "https://neulionms-a.akamaihd.net/nba/player/v6/nba/site/images/teams/" + value.teams[1] + '.png'];
   })
 
@@ -70,7 +70,7 @@ export default function HomeController () {
       $state.go('view', { obj: teams });
     }
 
- //    function scrape (count) { 
+ //    function scrape (count) {
  //    	x('http://nbastream.net', '#featured a', [{
 	// 	title: '@title',
  //    	link: '@href'

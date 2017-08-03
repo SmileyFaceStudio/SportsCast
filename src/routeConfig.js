@@ -3,20 +3,15 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
   $stateProvider
     .state('splash', {
         url: "/",
-        templateUrl: "partials/splash.html"
+        templateUrl: "partials/splash.html",
+        controller: "ButtonController"
     })
     .state('select', {
         url: "/select",
         templateUrl: "partials/select.html",
         controller: "SelectController"
     })
-    .state('frame', {
-        abstract: true,
-        url: "",
-        templateUrl: "partials/frame.html",
-        controller: "FrameController"
-    })
-    .state('frame.home', {
+    .state('home', {
         url: "/home",
         templateUrl: "partials/home.html",
         controller: "HomeController"
@@ -29,7 +24,10 @@ export default ['$stateProvider', '$urlRouterProvider', function($stateProvider,
             obj: null
         }
     })
-    
+    .state('rep-team', {
+        url: "/rep-team",
+        templateUrl: "partials/rep-team.html",
+    })
     $urlRouterProvider.otherwise("/");
 
 }];
