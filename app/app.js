@@ -13,6 +13,7 @@ var getUrl = _interopDefault(require('get-urls'));
 
 // Simple wrapper exposing environment variables to rest of the code.
 
+// The variables have been written to `env.json` by the build process.
 var env = jetpack.cwd(__dirname).read('env.json', 'json');
 
 var routeConfig = ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -475,6 +476,22 @@ angular$1.module('app.directives', [])
 // Here is the starting point for the application
 
 // Use new ES6 modules syntax for everything.
+// console.log('Loaded environment variables:', env);
+
+// var app = remote.app;
+// var appDir = jetpack.cwd(app.getAppPath());
+
+// // Holy crap! This is browser window with HTML and stuff, but I can read
+// // here files like it is node.js! Welcome to Electron world :)
+// console.log('The author of this app is:', appDir.read('package.json', 'json').author);
+// console.log('This is angular object ' + angular);
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     document.getElementById('greet').innerHTML = greet();
+//     document.getElementById('platform-info').innerHTML = os.platform();
+//     document.getElementById('env-name').innerHTML = env.name;
+// });
+
 angular$1
     .module('app', [
         'ui.router',
