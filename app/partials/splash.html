@@ -1,14 +1,14 @@
 <div class="splsh--pg">
 
   <div class="splsh--cntr-main">
-    <div class="splash--cntr-logo">
+    <div class="splsh--cntr-logo">
       <img class="" src="./assets/logo.png"/>
     </div>
   </div>
 
-  <div class="splsh--cntr-bttn" ng-controller="ButtonController">
-    <ng-include src="'partials/raised-button.html'" ></ng-include>
-    <!--<button ui-sref="{{ destination }}" class="{{ style }}">{{ message }}</button>-->
+  <div class="splsh--cntr-bttn" ng-controller="ButtonController as spb">
+    <!--<ng-include src="'partials/raised-button.html'" ></ng-include>-->
+    <button ui-sref="{{ spb.destination }}" class="{{ spb.style }}">{{ spb.message }}</button>
   </div>
 
   <div class="splsh--ftr-red">

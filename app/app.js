@@ -302,9 +302,29 @@ function SelectController () {
 
 function ButtonController () {
   return ["$scope", function($scope) {
-      $scope.destination = "select";
-      $scope.message = "WATCH";
-      $scope.style = "splsh--watch-bttn";
+      this.destination = "home";
+      this.message = "WATCH";
+      this.style = "splsh--watch-bttn";
+
+      this.setDestination = function(dst) {
+        this.destination = dst;
+      };
+
+      this.setMessage = function(msg) {
+        this.destination = msg;
+      };
+
+      this.setStyle = function(dst) {
+        this.style = dst;
+      };
+  }];
+}
+
+function TitleBarController () {
+  return ["$scope", function($scope) {
+      this.logo = "./assets/logo.png";
+      this.logIn = "Log In";
+      this.signUp = "Sign Up";
   }];
 }
 
@@ -313,6 +333,7 @@ angular$1.module('app.controllers', [])
 	.controller(ViewController.name, ViewController())
 	.controller(SelectController.name, SelectController())
 	.controller(ButtonController.name, ButtonController())
+	.controller(TitleBarController.name, TitleBarController())
 
 function passData () {
   return function() {  
