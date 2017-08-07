@@ -262,8 +262,13 @@ input {
 /* Keeps content even and together */
 .cntnt { width: 90%; margin: 0 auto 0 auto; }
   @media (min-width: 700px) {
-    .hm--cntnt { width: 97%; }
+    .cntnt { width: 95%; }
   }
+.cntnt-rght { width: 95%; margin: 0 0 0 5%; }
+  @media (min-width: 700px) {
+    .cntnt-rght { width: 97.5%; margin: 0 0 0 2.5%; }
+  }
+
 .flx-btwn { display: flex; align-items: flex-start;
   justify-content: space-between; }
 .flx-arnd { display: flex; align-items: flex-start;
@@ -272,13 +277,15 @@ input {
 .flx-bttm { display: flex; align-items: flex-end; }
 .flx-end { display: flex; align-content: space-around; }
 .mrgn-top { margin-top: 3rem; }
+.mrgn-bttm { margin-bottom: 3rem; }
+.mrgn-bttm-smll { margin-bottom: 2rem; }
 .pdng-smll { padding: 0 2rem 0 2rem; }
 .wdth-intl { width: initial; }
 
 /* Title bar sits on top of everthing */
 .ttl--bar { position: absolute; width: 100%; top: 3rem; /*background-color: #787878;*/
   z-index: 100; }
-.ttl--logo { width: 100px; }
+.ttl--logo { display: none; width: 100px; }
 .ttl--logo:after { content: ""; padding-bottom: 44.78%;
   /*background-color: #888888;*/ }
   @media (min-width: 700px) {
@@ -300,15 +307,25 @@ justify-content: center; width: 100%; height: 100%; /*background-color: #a0a0a0;
 .vd--ply { width: 100%; }
 
 /* Details about the Main game */
-.dts--cntr { position: absolute; top: 7rem; bottom: 7rem; /* background-color: #888888 */ }
-.dts--tm { position: relative; width: 15%; background-color: #989898; }
+.dts--cntr { position: absolute; bottom: 9rem; /* background-color: #888888 */ }
+@media (min-width: 900px) {
+  .dts--cntr { bottom: 12rem; }
+}
+
+@media (min-width: 1000px) {
+  .dts--cntr { bottom: 14rem; }
+}
+.dts--tm { position: relative; width: 15%; max-width: 150px; margin-bottom: 2rem;
+  background-color: #989898; border-radius: 15px; }
 .dts--tm-fl { padding: 0.5rem; }
 .dts--tm-img { position: relative; width: 100%; background-color: #a8a8a8; }
 .dts--tm-img:after { content: ""; display: block; padding-bottom: 100%; }
-.dts--tm-txt { position: relative; padding: 1rem; background-color: #bbbbbb; }
-.dts--btn-fr { padding: 1rem 1.5rem 1rem 1.5rem; border: none;
-  border-radius: 7px; background-color: #ffffff; font-family: @roboto-sans;
-  font-size: 2rem; outline: none; box-sizing: border-box; }
+.dts--tm-txt { position: relative; padding: 1rem; background-color: #bbbbbb;
+  text-align: center; }
+.dts--btn-fr { padding: 1rem 1.5rem 1rem 1.5rem; margin-right: 1rem;
+  border: none; border-radius: 7px; background-color: #ffffff;
+  font-family: @roboto-sans; font-size: 2rem; outline: none;
+  box-sizing: border-box; }
 .dts--btn-svn { padding: 1rem 1.5rem 1rem 1.5rem; border: 2px solid #ffffff;
   border-radius: 7px; background: transparent; font-family: @roboto-sans;
   font-size: 2rem; color: #ffffff; outline: none; box-sizing: border-box; }
@@ -316,6 +333,8 @@ justify-content: center; width: 100%; height: 100%; /*background-color: #a0a0a0;
 .dts--txt-ttl { font-size: 2.8rem; }
 .dts--txt-wtch { font-size: 2.5rem; }
 .dts--txt-fns { font-size: 1.7rem; }
+
+
 /* Bar over and under video display */
 .vd--mr-bar { position: absolute; width: 100%; height: 7rem; bottom: 0;
   background-color: @swoosh; opacity: 0.8; z-index: 2; }
