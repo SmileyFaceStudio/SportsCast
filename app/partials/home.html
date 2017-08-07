@@ -1,57 +1,123 @@
-<div class="hm--ttl-bar" ng-controller="TitleBarController as tb">
-	<div class="hm--cntnt hm--flx-btwn">
-		<div class="hm--ttl-logo">
-			<img class="hm--ttl-img" src="{{ tb.logo }}" />
+<!-- Title Bar that sits above the screen -->
+<div class="ttl--bar" ng-controller="TitleBarController as tb">
+	<div class="cntnt flx-btwn">
+		<div class="ttl--logo">
+			<img class="ttl--img" src="{{ tb.logo }}" />
 		</div>
-		<div class="hm--ttl-log">
-			<div class="hm--ttl-sn">
+		<div class="ttl--log">
+			<div class="ttl--sn">
 				<p>{{ tb.signUp }}</p>
 			</div>
-			<div class="hm--ttl-ln">
+			<div class="ttl--ln">
 				<p>{{ tb.logIn }}</p>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="hm--vd-cntr">
-	<div class="hm--vd-cntnt">
-		<div class="hm--vd-ply">
+<!-- Main Video content with description and red bar -->
+<div class="vd--cntr">
+	<div class="vd--cntnt">
+		<div class="dts--cntr cntnt flx-bttm">
+			<div class="dts--spc">
+				<div>
+					<p class="dts--txt-ttl">GSW vs LAL - Choose your team</p>
+				</div>
+				<div class="dts--tms flx-left">
+					<div class="dts--tm">
+						<div class="dts--tm-fl">
+							<div class="dts--tm-img">
+								<img src="" />
+							</div>
+							<div class="dts--tm-txt">
+								<p class="dts--txt-wtch">Watch</p>
+								<p class="dts--txt-fns">fans</p>
+							</div>
+						</div>
+					</div>
+					<div class="dts--vs wdth-intl">
+						<p>VS</p>
+					</div>
+					<div class="dts--tm">
+						<div class="dts--tm-fl">
+							<div class="dts--tm-img">
+								<img src="" />
+							</div>
+							<div class="dts--tm-txt">
+								<p class="dts--txt-wtch">Watch</p>
+								<p class="dts--txt-fns">fans</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p class="dts--txt-ttl">Quality:</p>
+				</div>
+				<div>
+					<button class="dts--btn-fr">480p</button>
+					<button class="dts--btn-svn">Guaranteed 720p</button>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="hm--mr-bar">
-	</div>
-	<div class="hm--dts-cntr">
-	</div>
-	<div class="hm--mr-txt">
-		<p>MORE GAMES TONIGHT</p>
+		<div class="vd--mr-bar">
+		</div>
+		<div class="vd--mr-txt">
+			<p>More Games Tonight</p>
+		</div>
+
+		<!-- Stream the video here... -->
+		<div class="vd--ply">
+		</div>
 	</div>
 </div>
 
-
-<div class="hm--cntnt">
-	<div class="hm--gms-desc">
-		<div class="hm--gms-dstxt">
+<!-- Bar to introduce other games -->
+<div class="cntnt">
+	<div class="gms--desc">
+		<div class="gms--dstxt">
 			<p>Other games tonight:</p>
 		</div>
-		<div class="hm--gms-dstxt">
+		<div class="gms--dstxt">
 			<p>Past Games</p>
 		</div>
 	</div>
 </div>
 
-<div class="hm--gms-cntr">
-	<div class="hm--cntnt">
-		<div class="hm--gm-cntr">
-			<div class="hm--gm-desc">
+<!-- Container for current and past games -->
+<div class="gms--cntr">
+	<div class="cntnt">
+		<div class="gm--cntr">
+			<div class="gm--desc">
 				<p>POR vs LAC</p>
 			</div>
-			<div class="hm--gm-img">
-				<div class="hm--gm-fill">
-					<div class="hm--gm-tm">
-						<div class="hm--gm-hm">
+			<div class="gm--img">
+				<div class="gm--fill">
+					<div class="gm--tms flx-btwn">
+						<div class="gm--tag flx-arnd">
+							<div class="gm--logo">
+								<img class="gm--logo-img" src="./assets/logo.png">
+							</div>
+							<div class="gm--tm">
+								<div class="gm--wtch">
+									<p>WATCH</p>
+								</div>
+								<div class="gm--fans">
+									<p>fans</p>
+								</div>
+							</div>
 						</div>
-						<div class="hm--gm-wy">
+						<div class="gm--tag flx-arnd">
+							<div class="gm--tm">
+								<div class="gm--wtch">
+									<p>WATCH</p>
+								</div>
+								<div class="gm--fans">
+									<p>fans</p>
+								</div>
+							</div>
+							<div class="gm--logo">
+								<img src="">
+							</div>
 						</div>
 					</div>
 				</div>
