@@ -18,10 +18,9 @@
 <!-- Main Video content with description and red bar -->
 <div class="vd--cntr">
 	<div class="vd--cntnt">
-		<div class="dts--cntr cntnt flx-bttm">
-			<div class="dts--spc">
-				<div>
-					<p class="dts--txt-ttl mrgn-bttm-smll"><b>GSW vs LAL</b> - Choose your team</p>
+		<div class="dts--cntr cntnt">
+				<div class="dts--txt-ttl mrgn-bttm-smll">
+					<p><b>GSW vs LAL</b> - Choose your team</p>
 				</div>
 				<div class="dts--tms flx-left">
 					<div class="dts--tm">
@@ -57,7 +56,6 @@
 					<button class="dts--btn-fr">480p</button>
 					<button class="dts--btn-svn">Guaranteed 720p</button>
 				</div>
-			</div>
 		</div>
 		<div class="vd--mr-bar">
 		</div>
@@ -72,55 +70,62 @@
 </div>
 
 <!-- Bar to introduce other games -->
-<div class="cntnt">
-	<div class="gms--desc">
-		<div class="gms--dstxt">
-			<p>Other games tonight:</p>
-		</div>
-		<div class="gms--dstxt">
-			<p>Past Games</p>
-		</div>
+<div class="gms--desc cntnt">
+	<div class="gms--dstxt">
+		<p>Other games tonight:</p>
+	</div>
+	<div class="gms--dstxt">
+		<p>Past Games</p>
 	</div>
 </div>
 
 <!-- Container for current and past games -->
-<div class="gms--cntr">
-	<div class="cntnt-rght">
-		<div class="gm--cntr">
-			<div class="gm--desc">
-				<p>POR vs LAC</p>
+<div class="gms--cntr cntnt-rght">
+	<!-- ng-repeat for games in queue -->
+	<div class="gm--cntr">
+		<div class="gm--desc">
+			<p>POR vs LAC</p>
+		</div>
+		<div class="gm--img">
+			<!-- put game image or video here -->
+			<div class="gm--fill">
 			</div>
-			<div class="gm--img">
-				<div class="gm--fill">
-					<div class="gm--tms flx-btwn">
-						<div class="gm--tag flx-arnd">
-							<div class="gm--logo">
-								<img class="gm--logo-img" src="./assets/logo.png">
-							</div>
-							<div class="gm--tm">
-								<div class="gm--wtch">
-									<p>WATCH</p>
-								</div>
-								<div class="gm--fans">
-									<p>fans</p>
-								</div>
-							</div>
+			<div class="gm--tms flx-btwn">
+				<div class="gm--tag flx-arnd">
+					<div class="gm--logo">
+						<img class="gm--logo-img" src="./assets/logo.png">
+					</div>
+					<div class="gm--tm">
+						<div class="gm--wtch">
+							<p>WATCH</p>
 						</div>
-						<div class="gm--tag flx-arnd">
-							<div class="gm--tm">
-								<div class="gm--wtch">
-									<p>WATCH</p>
-								</div>
-								<div class="gm--fans">
-									<p>fans</p>
-								</div>
-							</div>
-							<div class="gm--logo">
-								<img src="">
-							</div>
+						<div class="gm--fans">
+							<p>fans</p>
 						</div>
 					</div>
 				</div>
+				<div class="gm--tag flx-arnd">
+					<div class="gm--tm">
+						<div class="gm--wtch">
+							<p>WATCH</p>
+						</div>
+						<div class="gm--fans">
+							<p>fans</p>
+						</div>
+					</div>
+					<div class="gm--logo">
+						<img src="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end ng-repeat -->
+	<div class="nxt--cntr">
+		<div class="nxt--arrw wdth-intl">
+			<div class="nxt--dwn">
+			</div>
+			<div class="nxt--up">
 			</div>
 		</div>
 	</div>
